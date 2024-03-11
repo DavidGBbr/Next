@@ -7,7 +7,14 @@ export const metadata: Metadata = {
 };
 
 const ContatoPage = () => {
-  return <div>Contato</div>;
+  return (
+    <main>
+      <h2>Contato</h2>
+      <h2 style={{ margin: "1600px 0" }} id="contato">
+        Entre em contato conosco
+      </h2>
+    </main>
+  );
 };
 
 export default ContatoPage;
