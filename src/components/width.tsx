@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 
 const Width = () => {
-  const [width, setWidth] = useState(0);
+  const [width, setWidth] = useState(document.documentElement.clientWidth);
   const [ativo, setAtivo] = useState(false);
 
   useEffect(() => {
