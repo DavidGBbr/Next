@@ -1,3 +1,4 @@
+import ClientFetch from "@/components/client-fetch";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import React from "react";
@@ -12,7 +13,7 @@ const SobrePage = () => {
   return (
     <main>
       <h2>Sobre</h2>
-      <Width />
+      <ClientFetch />
     </main>
   );
 };
