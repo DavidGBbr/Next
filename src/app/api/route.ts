@@ -1,11 +1,26 @@
+import { cookies } from "next/headers";
+
 export async function GET() {
-  const response = await fetch("https://api.origamid.online/vendas", {
+  const response = await fetch("https://api.origamid.online/conta/login", {
+    method: "POST",
     headers: {
-      apikey: "ORIGAMID123456",
+      "Content-Type": "application/json",
     },
+    body: JSON.stringify({
+      username: "dog",
+      password: "dog",
+    }),
   });
 
-  const vendas = await response.json();
+  if (!response.ok) {
+    return Response.json({ error: "Erro na api" });
+  }
 
-  return Response.json(vendas);
+  const data = await response.json();
+  cookies().set("token", data.token, {
+    httpOnly: true,
+    secure: true,
+  });
+
+  return Response.json(data);
 }
