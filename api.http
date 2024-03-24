@@ -1,9 +1,0 @@
-GET http://localhost:3000/api
-
-###
-POST https://api.origamid.online/conta/login
-
-{
-  "username": "dog",
-  "password": "dog",
-}
