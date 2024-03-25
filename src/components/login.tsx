@@ -1,5 +1,6 @@
 "use client";
 
+import { handleLogin } from "@/actions/handle-login";
 import React, { FormEvent, useState } from "react";
 
 const Login = () => {
@@ -8,19 +9,7 @@ const Login = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
-    const response = await fetch("/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    });
-    const json = await response.json();
-    if (response.ok) window.location.href = "/";
+    const response = await handleLogin(username, password);
   };
 
   return (

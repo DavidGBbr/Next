@@ -1,11 +1,15 @@
 "use client";
 
+import { getCookie } from "@/actions/get-cookie";
 import { setCookie } from "@/actions/set-cookie";
+import Cookie from "@/components/cookie";
+import Login from "@/components/login";
 import { useState } from "react";
 
-export default async function HomePage() {
+export default function HomePage() {
   const [value, setValue] = useState("");
-  async function handleClick() {
+
+  async function handleSetCookie() {
     const response = await setCookie("segredo", "123456");
     setValue(response.value);
   }
@@ -13,7 +17,9 @@ export default async function HomePage() {
   return (
     <main>
       <h1>Home: {value}</h1>
-      <button onClick={handleClick}>Definir Cookie</button>
+      <button onClick={handleSetCookie}>Definir Cookie</button>
+      <Cookie />
+      <Login />
     </main>
   );
 }

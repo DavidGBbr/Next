@@ -27,9 +27,6 @@ const Menu = async () => {
       <li>
         <Link href="/">Home</Link>
       </li>
-      <li>
-        {conta.autorizado ? conta.usuario : <Link href="/login">Login</Link>}
-      </li>
     </ul>
   );
 };
