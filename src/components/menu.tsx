@@ -27,6 +27,9 @@ const Menu = async () => {
       <li>
         <Link href="/">Home</Link>
       </li>
+      <li>
+        <Link href="/acoes">Ações</Link>
+      </li>
     </ul>
   );
 };
