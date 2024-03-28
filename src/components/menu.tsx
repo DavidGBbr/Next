@@ -28,7 +28,10 @@ const Menu = async () => {
         <Link href="/">Home</Link>
       </li>
       <li>
-        <Link href="/acoes">Ações</Link>
+        <Link href="/produtos">Produtos</Link>
+      </li>
+      <li>
+        <Link href="/produtos/adicionar">Adicionar produto</Link>
       </li>
     </ul>
   );
