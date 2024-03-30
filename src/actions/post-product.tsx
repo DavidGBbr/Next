@@ -4,7 +4,18 @@ import { Produto } from "@/app/produtos/page";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function addProduct(formData: FormData) {
+function validarNome(nome: unknown) {
+  return typeof nome === "string" && nome.length > 1;
+}
+
+function validarPreco(preco: unknown) {
+  return typeof preco === "number" && preco > 0;
+}
+
+export async function addProduct(
+  state: { errors: string[] },
+  formData: FormData
+) {
   const data: Produto = {
     nome: formData.get("nome") as string,
     descricao: formData.get("descricao") as string,
@@ -12,16 +23,28 @@ export async function addProduct(formData: FormData) {
     estoque: Number(formData.get("estoque")),
     importado: formData.get("importado") ? 1 : 0,
   };
+  let errors = [];
+  if (!validarNome(data.nome)) errors.push("Nome inválido");
+  if (!validarPreco(data.preco)) errors.push("Preço inválido");
+  if (errors.length > 0) return { errors };
 
-  const response = await fetch("https://api.origamid.online/produtos", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  const responseData = await response.json();
-  console.log(responseData);
+  try {
+    const response = await fetch("https://api.origamid.online/produtos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) throw new Error("Erro ao adicionar o produto.");
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return {
+        errors: [error.message],
+      };
+    }
+  }
+  //return { errors: [] };
   revalidatePath("/produtos");
   redirect("/produtos");
 }

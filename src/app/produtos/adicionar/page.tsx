@@ -1,7 +1,7 @@
 "use client";
 import { addProduct } from "@/actions/post-product";
 import React from "react";
-import { useFormStatus } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 
 function Button() {
   const status = useFormStatus();
@@ -13,10 +13,13 @@ function Button() {
 }
 
 const AdicionarPage = () => {
+  const [state, formAction] = useFormState(addProduct, { errors: [] });
+  console.log(state);
+
   return (
     <main>
       <h1>Adicionar Produto</h1>
-      <form action={addProduct}>
+      <form action={formAction}>
         <label htmlFor="nome">Nome</label>
         <input type="text" id="nome" name="nome" />
         <label htmlFor="preco">Preço</label>
@@ -29,6 +32,11 @@ const AdicionarPage = () => {
           <input type="checkbox" name="importado" id="importado" />
           Importado
         </label>
+        {state.errors.map((error, i) => (
+          <p style={{ color: "red" }} key={i}>
+            {error}
+          </p>
+        ))}
         <Button />
       </form>
     </main>
