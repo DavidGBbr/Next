@@ -9,13 +9,15 @@ export type Produto = {
   importado: 0 | 1;
 };
 
-const ProdutosLista = async () => {
+const ProdutosLista = async ({ espera }: { espera?: number }) => {
   let produtos: Produto[] = [];
+  if (espera) await new Promise((resolve) => setTimeout(resolve, espera));
   try {
     const response = await fetch("https://api.origamid.online/produtos", {
-      next: {
-        revalidate: 5,
-      },
+      cache: "no-store",
+      // next: {
+      //   revalidate: 5,
+      // },
     });
     if (!response.ok) throw new Error("Erro ao carregar os produtos.");
     produtos = (await response.json()) as Produto[];
