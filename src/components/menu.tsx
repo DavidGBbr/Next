@@ -1,37 +1,21 @@
-import { cookies } from "next/headers";
+"use client";
 import Link from "next/link";
-import React from "react";
+import { useParams, usePathname } from "next/navigation";
+import React, { useEffect } from "react";
 
-type Conta = { autorizado: boolean; usuario: string };
-
-const Menu = async () => {
-  let conta: Conta = {
-    autorizado: false,
-    usuario: "",
-  };
-
-  const token = cookies().get("token")?.value;
-
-  const response = await fetch("https://api.origamid.online/conta/perfil", {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
-
-  if (response.ok) {
-    conta = (await response.json()) as Conta;
-  }
-
+const Menu = () => {
+  const params = useParams();
+  const pathname = usePathname();
+  useEffect(() => {
+    console.log("Rota mudou");
+  }, [pathname]);
   return (
     <ul className="menu">
       <li>
         <Link href="/">Home</Link>
       </li>
       <li>
-        <Link href="/produtos">Produtos</Link>
-      </li>
-      <li>
-        <Link href="/produtos/adicionar">Adicionar produto</Link>
+        <Link href="/acoes">Ações: {params.acao}</Link>
       </li>
     </ul>
   );
