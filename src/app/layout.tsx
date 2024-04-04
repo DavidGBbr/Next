@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import Menu from "@/components/menu";
+import type { Metadata } from 'next';
+import './globals.css';
+import Menu from '@/components/menu';
 
 export const metadata: Metadata = {
-  title: "Next",
-  description: "Curso de next",
+  title: 'Origamid Next',
+  description: 'Criado por Origamid',
 };
 
 export default function RootLayout({
