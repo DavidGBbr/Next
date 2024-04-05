@@ -1,12 +1,13 @@
-import { getCursos } from "@/api/cursos";
+import { getCurso, getCursos } from "@/api/cursos";
+import { Metadata } from "next";
 import Link from "next/link";
 
-export async function generateStaticParams() {
-  const cursos = await getCursos();
-  return cursos.map((curso) => ({
-    curso: curso.slug,
-  }));
-}
+export const metadata: Metadata = {
+  title: "Cursos Origamid",
+  description: "Cursos online de Front End e UI Design.",
+  keywords: ["HTML", "CSS", "JavaScript", "UI Design"],
+  authors: [{ name: "André Rafael", url: "https://andrerafael.com" }],
+};
 
 export default async function CursosPage() {
   const cursos = await getCursos();
